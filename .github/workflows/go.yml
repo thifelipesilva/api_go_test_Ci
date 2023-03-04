@@ -42,10 +42,10 @@ jobs:
       run: go test -v main_test.go
 
   build:
-    needs: 'ubuntu-latest'
+    needs: test
+    run-on: 'ubuntu-latest'
     steps: 
     - uses: actions/checkout@v3
-
     - name: Build
       run: go build -v main.go
 
