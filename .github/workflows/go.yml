@@ -42,16 +42,20 @@ jobs:
       run: go test -v main_test.go
 
   build:
-    needs: test
-    runs-on: ${{ matrix.os }} 
-    strategy:
-      matrix:
-        os: ['ubuntu-latest', 'ubuntu-18.04']
+    needs: 'ubuntu-latest'
     steps: 
     - uses: actions/checkout@v3
 
     - name: Build
       run: go build -v main.go
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        # Artifact name
+        name: programa
+        # A file, directory or wildcard pattern that describes what to upload
+        path: main
 
   docker:
     needs: build
